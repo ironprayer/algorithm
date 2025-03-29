@@ -5,26 +5,33 @@ public class KClosetPointToOrigin {
         int[][] answer = new int[k][2];
         int[] euclideanValues = new int[k];
         int max = 0;
+        int count = k;
 
         for (int i = 0; i < points.length; i++) {
             int x = points[i][0];
             int y = points[i][1];
             int euclideanValue = x * x + y * y;
-
-            if ( k > 0 ) {
+            if ( count > 0 ) {
                 max = Math.max(max, euclideanValue);
                 answer[i][0] = x;
                 answer[i][1] = y;
                 euclideanValues[i] = euclideanValue;
-                k--;
+                count--;
             } else if (max > euclideanValue) {
+                int newMax = 0;
                 for (int j = 0; j < k; j++) {
-                    answer[j][0] = x;
-                    answer[j][1] = y;
+                    if(max == euclideanValues[j]) {
+                        euclideanValues[j] = euclideanValue;
+                        answer[j][0] = x;
+                        answer[j][1] = y;
+                    }
+                    newMax = Math.max(euclideanValues[j], newMax);
 
-                    if(max == (x * x + y * y)) {}
                 }
+                max = newMax;
             }
         }
+
+        return answer;
     }
 }
