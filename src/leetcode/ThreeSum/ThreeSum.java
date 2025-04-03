@@ -12,36 +12,20 @@ public class ThreeSum {
 
         while (first != second && second != third) {
             int elementSum = nums[first] + nums[second] + nums[third];
-
             if (elementSum == 0) {
                 result.add(Arrays.asList(nums[first], nums[second], nums[third]));
-                if(second == third - 1) {
-                    first++;
-                    second = first + 1;
-                    third = nums.length - 1;
-                } else {
-                    second++;
-                }
-            } else if (elementSum > 0) {
-                if(second == third - 1) {
-                    first++;
-                    second = first + 1;
-                    third = nums.length - 1;
-                } else {
-                    third--;
-                }
+            }
 
+            if (second == third - 1) {
+                first++;
+                second = first + 1;
+                third = nums.length - 1;
+            } else if (elementSum > 0) {
+                third--;
             } else {
-                if(second == third - 1) {
-                    first++;
-                    second = first + 1;
-                    third = nums.length - 1;
-                } else {
-                    second++;
-                }
+                second++;
             }
         }
-
         return result.stream().toList();
     }
 }
